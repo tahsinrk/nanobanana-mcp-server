@@ -17,6 +17,7 @@ from PIL import Image as PILImage
 import io
 
 from ..config.settings import GeminiConfig
+from ..utils.validation_utils import generate_descriptive_filename, resolve_unique_path
 
 
 @dataclass
@@ -180,7 +181,7 @@ class ImageStorageService:
         Returns:
             StoredImageInfo with paths and metadata
         """
-        # Generate unique ID
+        # Generate unique ID (kept for internal tracking)
         image_id = str(uuid.uuid4())
 
         # Determine file extension
@@ -193,10 +194,20 @@ class ImageStorageService:
         }
         ext = ext_map.get(mime_type, ".png")
 
-        # Create file paths
-        filename = f"{image_id}{ext}"
-        full_path = str(self.base_dir / filename)
-        thumbnail_filename = f"{image_id}_thumb.jpg"
+        # Descriptive filename from prompt if available (tahsinrk fork)
+        prompt = (metadata or {}).get("prompt") or (metadata or {}).get("enhanced_prompt")
+        if prompt:
+            descriptive_name = generate_descriptive_filename(
+                prompt=prompt, extension=ext.lstrip(".")
+            )
+            full_path = resolve_unique_path(str(self.base_dir), descriptive_name)
+            filename = os.path.basename(full_path)
+        else:
+            filename = f"{image_id}{ext}"
+            full_path = str(self.base_dir / filename)
+
+        stem = os.path.splitext(filename)[0]
+        thumbnail_filename = f"{stem}_thumb.jpg"
         thumbnail_path = str(self.thumbnails_dir / thumbnail_filename)
 
         try:

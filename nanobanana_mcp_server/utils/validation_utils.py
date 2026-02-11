@@ -4,6 +4,7 @@ from typing import Any, List, Optional, Union
 from pathlib import Path
 import re
 import os
+from datetime import datetime
 from urllib.parse import urlparse
 from ..core.exceptions import ValidationError
 
@@ -247,6 +248,72 @@ def validate_aspect_ratio_string(aspect_ratio: str) -> None:
             f"Unsupported aspect_ratio: '{aspect_ratio}'. "
             f"Supported values: {', '.join(SUPPORTED_ASPECT_RATIOS)}"
         )
+
+
+# Words that add no value to an image filename (tahsinrk fork)
+_FILENAME_STOP_WORDS = {
+    # articles / prepositions / conjunctions
+    "a", "an", "the", "in", "on", "at", "to", "for", "of", "with", "by",
+    "from", "and", "or", "is", "are", "was", "were", "be", "been", "being",
+    "that", "this", "it", "its", "as", "but", "not", "so", "if", "then",
+    "than", "too", "very", "just", "about", "into", "through", "during",
+    "before", "after", "above", "below", "between", "under", "over",
+    "some", "such", "no", "each", "every", "all", "any", "both", "few",
+    "more", "most", "other", "up", "out", "off", "like", "using", "based",
+    # image-generation filler
+    "style", "image", "photo", "picture", "create", "generate", "make",
+    "showing", "depicted", "featuring", "render", "rendered",
+    # subjective qualifiers that don't describe the subject
+    "single", "perfect", "beautiful", "stunning", "amazing", "realistic",
+    "photorealistic", "detailed", "high", "low", "res", "resolution",
+    "quality", "professional", "viewed", "looking", "seen", "taken",
+    "captured", "prominent", "simple", "complex",
+}
+
+
+def generate_descriptive_filename(
+    prompt: str,
+    extension: str = "png",
+    max_words: int = 5,
+) -> str:
+    """Generate a descriptive filename from a prompt. (tahsinrk fork)
+
+    Format: keyword1-keyword2-keyword3_feb11-26.png
+    If the resulting file already exists, the caller should use
+    resolve_unique_path() to append a counter.
+    """
+    words = re.findall(r"[a-z0-9]+", prompt.lower())
+    seen: set[str] = set()
+    keywords: list[str] = []
+    for w in words:
+        if w not in _FILENAME_STOP_WORDS and len(w) > 1 and w not in seen:
+            keywords.append(w)
+            seen.add(w)
+            if len(keywords) >= max_words:
+                break
+    if not keywords:
+        keywords = ["image"]
+    slug = "-".join(keywords)
+
+    now = datetime.now()
+    month_abbr = now.strftime("%b").lower()
+    date_suffix = f"{month_abbr}{now.day}-{now.strftime('%y')}"
+
+    return f"{slug}_{date_suffix}.{extension}"
+
+
+def resolve_unique_path(directory: str, filename: str) -> str:
+    """Return a path in directory that doesn't collide. (tahsinrk fork)
+
+    Appends _2, _3, etc. if the file already exists.
+    """
+    base, ext = os.path.splitext(filename)
+    path = os.path.join(directory, filename)
+    counter = 2
+    while os.path.exists(path):
+        path = os.path.join(directory, f"{base}_{counter}{ext}")
+        counter += 1
+    return path
 
 
 def resolve_output_path(
