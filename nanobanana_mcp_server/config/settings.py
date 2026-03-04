@@ -14,6 +14,7 @@ class ModelTier(str, Enum):
 
     FLASH = "flash"  # Speed-optimized (Gemini 2.5 Flash)
     PRO = "pro"  # Quality-optimized (Gemini 3 Pro)
+    NB2 = "nb2"  # Nano Banana 2 (Gemini 3.1 Flash Image — Flash speed + Pro quality)
     AUTO = "auto"  # Automatic selection
 
 
@@ -56,6 +57,7 @@ class ServerConfig:
     auth_method: AuthMethod = AuthMethod.AUTO
     gcp_project_id: str | None = None
     gcp_region: str = "us-central1"
+    gemini_base_url: str | None = None
 
     @classmethod
     def from_env(cls) -> "ServerConfig":
@@ -102,11 +104,14 @@ class ServerConfig:
         output_path = Path(output_dir).resolve()
         output_path.mkdir(parents=True, exist_ok=True)
 
+        gemini_base_url = os.getenv("GEMINI_BASE_URL", "").strip() or None
+
         return cls(
             gemini_api_key=api_key,
             auth_method=auth_method,
             gcp_project_id=gcp_project,
             gcp_region=gcp_region,
+            gemini_base_url=gemini_base_url,
             transport=os.getenv("FASTMCP_TRANSPORT", "stdio"),
             host=os.getenv("FASTMCP_HOST", "127.0.0.1"),
             port=int(os.getenv("FASTMCP_PORT", "9000")),
@@ -152,6 +157,15 @@ class ProImageConfig(BaseModelConfig):
     supports_media_resolution: bool = True
     enable_search_grounding: bool = True
     request_timeout: int = 90  # Pro model needs more time for 4K
+
+
+@dataclass
+class NanoBanana2Config(ProImageConfig):
+    """Gemini 3.1 Flash Image configuration (Flash speed + Pro quality)."""
+
+    model_name: str = "gemini-3.1-flash-image-preview"
+    request_timeout: int = 60  # Flash-speed model
+    supports_thinking: bool = False  # Not supported by this model
 
 
 @dataclass

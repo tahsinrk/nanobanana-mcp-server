@@ -17,10 +17,16 @@ All fork changes are tagged with `(tahsinrk fork)` comments in the code.
 3. **Daily budget cap** in `tools/generate_image.py` -- estimated spend tracker, default $5/day. Configured via `NANOBANANA_DAILY_BUDGET_USD` and `NANOBANANA_COST_PER_IMAGE` env vars. Resets at midnight. This is an estimate (not exact API billing) using $0.15/image average.
 4. **Descriptive filenames** -- images are named from the prompt (3-5 keywords + date), e.g. `toronto-skyline-golden-hour_feb11-26.png`. Collision-safe with `_2`, `_3` suffixes. Code in `utils/validation_utils.py`, applied in `enhanced_image_service.py`, `pro_image_service.py`, and `image_storage_service.py`.
 
+### Model Tiers
+
+- **NB2** (Nano Banana 2, `gemini-3.1-flash-image-preview`): Default model. Flash speed + 4K resolution. No thinking_level support. Replaced Flash as the auto-selection default.
+- **Pro** (`gemini-3-pro-image-preview`): Highest quality. 4K. Supports thinking_level and grounding.
+- **Flash** (`gemini-2.5-flash-image-preview`): Legacy speed tier. Still available but NB2 is better in most cases.
+
 ### Defaults for Pro Model
 
-- **`thinking_level`**: Always `HIGH` unless Tahsin asks to change it or Claude has a reason to lower it (confirm first).
-- **`enable_grounding`**: `True` by default. Grounding runs a Google Search before generation to pull visual references for real-world subjects (landmarks, products, people). Keeps images factually accurate. Less useful for abstract/creative prompts but generally harmless to leave on.
+- **`thinking_level`**: `None` (auto) by default. Pro model selects its own reasoning depth. Set to `high` explicitly when maximum quality is needed.
+- **`enable_grounding`**: `True` by default. Grounding runs a Google Search before generation to pull visual references for real-world subjects (landmarks, products, people). Keeps images factually accurate. NB2 also supports grounding.
 
 ### Environment Variables (our additions)
 
@@ -32,21 +38,23 @@ All fork changes are tagged with `(tahsinrk fork)` comments in the code.
 
 ### Upstream Merge Protocol
 
-When Tahsin asks to check for upstream updates:
+Upstream uses `master` branch (not `main`). The fork and upstream have unrelated git histories, so `git merge` fails. Use the "rebase from upstream" approach: create a branch from upstream/master, re-apply our customizations, then force-push to our master.
 
 ```bash
 cd "/Users/tkhan/Dropbox/Claude Code/nanobanana-mcp-server"
-git fetch upstream
-git log upstream/main --oneline -10   # Review what changed
-git diff main..upstream/main --stat   # See which files changed
+git fetch upstream master
+git log upstream/master --oneline -10   # Review what changed
+git diff master..upstream/master --stat   # See which files changed
 ```
 
 **Before merging:** Review changes to these files carefully (they contain our customizations):
 - `nanobanana_mcp_server/tools/generate_image.py` (rate limiter, budget cap, readOnlyHint)
 
-**Merge only after reviewing:** `git merge upstream/main`
-
-**If conflicts arise** in our customized files, always preserve our rate limiter and budget cap code. The upstream author's changes should be merged around our additions.
+**Our customizations to re-apply after taking upstream's code:**
+1. Rate limiter + budget cap functions and calls in `generate_image.py`
+2. `readOnlyHint: False` in `generate_image.py`
+3. Descriptive filenames in `utils/validation_utils.py`, `enhanced_image_service.py`, `pro_image_service.py`, `image_storage_service.py`
+4. Our CLAUDE.md and `.github/workflows/check-upstream.yml`
 
 **Never auto-update.** Always review upstream changes before merging. Pin to known-good versions.
 
