@@ -19,14 +19,9 @@ All fork changes are tagged with `(tahsinrk fork)` comments in the code.
 
 ### Model Tiers
 
-- **NB2** (Nano Banana 2, `gemini-3.1-flash-image-preview`): Default model. Flash speed + 4K resolution. No thinking_level support. Replaced Flash as the auto-selection default.
-- **Pro** (`gemini-3-pro-image-preview`): Highest quality. 4K. Supports thinking_level and grounding.
-- **Flash** (`gemini-2.5-flash-image-preview`): Legacy speed tier. Still available but NB2 is better in most cases.
-
-### Defaults for Pro Model
-
-- **`thinking_level`**: `None` (auto) by default. Pro model selects its own reasoning depth. Set to `high` explicitly when maximum quality is needed.
-- **`enable_grounding`**: `True` by default. Grounding runs a Google Search before generation to pull visual references for real-world subjects (landmarks, products, people). Keeps images factually accurate. NB2 also supports grounding.
+- **NB2** (Nano Banana 2, `gemini-3.1-flash-image-preview`): Default model. Flash speed + 4K resolution. No thinking_level support.
+- **Pro** (`gemini-3-pro-image-preview`): Highest quality. 4K. Supports `thinking_level` (default: `None`/auto, set `high` for max quality) and `enable_grounding` (default: `True`). NB2 also supports grounding.
+- **Flash** (`gemini-2.5-flash-image-preview`): Legacy speed tier. NB2 is better in most cases.
 
 ### Environment Variables (our additions)
 
@@ -50,18 +45,10 @@ git diff master..upstream/master --stat   # See which files changed
 **Before merging:** Review changes to these files carefully (they contain our customizations):
 - `nanobanana_mcp_server/tools/generate_image.py` (rate limiter, budget cap, readOnlyHint)
 
-**Our customizations to re-apply after taking upstream's code:**
-1. Rate limiter + budget cap functions and calls in `generate_image.py`
-2. `readOnlyHint: False` in `generate_image.py`
-3. Descriptive filenames in `utils/validation_utils.py`, `enhanced_image_service.py`, `pro_image_service.py`, `image_storage_service.py`
-4. Our CLAUDE.md and `.github/workflows/check-upstream.yml`
-
-**Never auto-update.** Always review upstream changes before merging. Pin to known-good versions.
+**After taking upstream's code:** Re-apply all items from "Our Customizations" above, plus preserve our CLAUDE.md and `.github/workflows/check-upstream.yml`. Never auto-update — always review upstream changes before merging.
 
 ### Output Directory
 
 Images go to `/Users/tkhan/Dropbox/Claude Code/nanobanana-images/`. Set via `IMAGE_OUTPUT_DIR` in the MCP config (`~/.claude.json`).
 
-
-
-For full architecture documentation, development commands, configuration reference, and troubleshooting, see `ARCHITECTURE.md` in this directory. That file covers the layered architecture, service components, model selection logic, FastMCP integration patterns, and common issues.
+For full architecture docs, dev commands, and troubleshooting, see `ARCHITECTURE.md`.
