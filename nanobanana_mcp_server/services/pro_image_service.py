@@ -15,7 +15,7 @@ from ..config.settings import MediaResolution, ProImageConfig, ThinkingLevel
 from ..core.exceptions import ImageProcessingError
 from ..core.progress_tracker import ProgressContext
 from ..utils.image_utils import create_thumbnail, validate_image_format
-from ..utils.validation_utils import resolve_output_path, validate_aspect_ratio_string
+from ..utils.validation_utils import generate_descriptive_filename, resolve_output_path, resolve_unique_path, validate_aspect_ratio_string
 from .gemini_client import GeminiClient
 from .image_storage_service import ImageStorageService
 
@@ -179,11 +179,11 @@ class ProImageService:
                         # Storage handling - custom output_path takes precedence
                         if output_path:
                             # Save directly to specified output path
-                            timestamp = datetime.now(tz=UTC).strftime("%Y%m%d_%H%M%S")
-                            image_hash = hashlib.md5(
-                                image_bytes, usedforsecurity=False
-                            ).hexdigest()[:8]
-                            default_filename = f"pro_{timestamp}_{i + 1}_{j + 1}_{image_hash}.{self.config.default_image_format}"
+                            # Descriptive filename from prompt (tahsinrk fork)
+                            default_filename = generate_descriptive_filename(
+                                prompt=prompt or "image",
+                                extension=self.config.default_image_format,
+                            )
                             overall_index = (i * len(images)) + j + 1
 
                             full_path = resolve_output_path(

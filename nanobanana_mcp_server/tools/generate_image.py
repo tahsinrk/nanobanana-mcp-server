@@ -2,6 +2,7 @@ import base64
 import logging
 import mimetypes
 import os
+import time
 from typing import Annotated, Literal
 
 from fastmcp import Context, FastMCP
@@ -15,13 +16,61 @@ from ..core.exceptions import ValidationError
 from ..utils.validation_utils import validate_output_path
 
 
+# --- Rate limiter and budget cap (tahsinrk fork) ---
+_rate_limit_calls: list[float] = []
+_RATE_LIMIT_RPM = int(os.getenv("NANOBANANA_RATE_LIMIT_RPM", "10"))
+
+# Daily budget tracking. Resets each calendar day.
+# Estimated cost per image: $0.04 (Flash 1K) to $0.24 (Pro 4K).
+# We use $0.15 as a conservative average for budget tracking.
+_COST_PER_IMAGE_EST = float(os.getenv("NANOBANANA_COST_PER_IMAGE", "0.15"))
+_DAILY_BUDGET_USD = float(os.getenv("NANOBANANA_DAILY_BUDGET_USD", "5.00"))
+_daily_spend: float = 0.0
+_daily_spend_date: str = ""
+
+
+def _check_rate_limit() -> None:
+    """Sliding-window rate limiter. Raises ValidationError if limit exceeded."""
+    now = time.monotonic()
+    window = 60.0  # 1 minute
+    # Prune old entries
+    while _rate_limit_calls and _rate_limit_calls[0] < now - window:
+        _rate_limit_calls.pop(0)
+    if len(_rate_limit_calls) >= _RATE_LIMIT_RPM:
+        raise ValidationError(
+            f"Rate limit exceeded: {_RATE_LIMIT_RPM} requests per minute. "
+            f"Wait {int(window - (now - _rate_limit_calls[0]))}s before retrying."
+        )
+    _rate_limit_calls.append(now)
+
+
+def _check_daily_budget(n: int = 1) -> None:
+    """Check estimated daily spend against budget. Resets at midnight."""
+    global _daily_spend, _daily_spend_date
+    import datetime
+
+    today = datetime.date.today().isoformat()
+    if _daily_spend_date != today:
+        _daily_spend = 0.0
+        _daily_spend_date = today
+
+    projected = _daily_spend + (n * _COST_PER_IMAGE_EST)
+    if projected > _DAILY_BUDGET_USD:
+        raise ValidationError(
+            f"Daily budget limit reached: ~${_daily_spend:.2f} spent today "
+            f"(budget: ${_DAILY_BUDGET_USD:.2f}). "
+            f"Override with NANOBANANA_DAILY_BUDGET_USD env var or wait until tomorrow."
+        )
+    _daily_spend += n * _COST_PER_IMAGE_EST
+
+
 def register_generate_image_tool(server: FastMCP):
     """Register the generate_image tool with the FastMCP server."""
 
     @server.tool(
         annotations={
             "title": "Generate or edit images (Multi-Model: Flash & Pro)",
-            "readOnlyHint": True,
+            "readOnlyHint": False,  # (tahsinrk fork) tool writes files to disk
             "openWorldHint": True,
         }
     )
@@ -143,6 +192,10 @@ def register_generate_image_tool(server: FastMCP):
         logger = logging.getLogger(__name__)
 
         try:
+            # Rate limit and budget check (tahsinrk fork)
+            _check_rate_limit()
+            _check_daily_budget(n)
+
             # Construct input_image_paths list from individual parameters
             input_image_paths = []
             for path in [input_image_path_1, input_image_path_2, input_image_path_3]:

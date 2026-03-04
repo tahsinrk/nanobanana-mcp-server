@@ -12,7 +12,7 @@ from .gemini_client import GeminiClient
 from .files_api_service import FilesAPIService
 from .image_database_service import ImageDatabaseService
 from ..utils.image_utils import create_thumbnail, validate_image_format
-from ..utils.validation_utils import resolve_output_path
+from ..utils.validation_utils import generate_descriptive_filename, resolve_output_path, resolve_unique_path
 from ..config.settings import GeminiConfig
 from ..config.constants import THUMBNAIL_SIZE, TEMP_FILE_SUFFIX
 from PIL import Image as PILImage
@@ -340,17 +340,22 @@ class EnhancedImageService:
             image_index_for_path: Overall 1-based index for multi-image output path naming
         """
         # Step 3: M->>FS: save full-res image
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        image_hash = hashlib.md5(image_bytes).hexdigest()[:8]
-        default_filename = f"gen_{timestamp}_{response_index}_{image_index}_{image_hash}.{self.config.default_image_format}"
+        # Descriptive filename from prompt (tahsinrk fork)
+        default_filename = generate_descriptive_filename(
+            prompt=prompt or "image",
+            extension=self.config.default_image_format,
+        )
 
         # Resolve the output path using the utility function
-        full_path = resolve_output_path(
-            output_path=output_path,
-            default_dir=self.out_dir,
-            default_filename=default_filename,
-            image_index=image_index_for_path,
-        )
+        if output_path is None:
+            full_path = resolve_unique_path(self.out_dir, default_filename)
+        else:
+            full_path = resolve_output_path(
+                output_path=output_path,
+                default_dir=self.out_dir,
+                default_filename=default_filename,
+                image_index=image_index_for_path,
+            )
 
         # Ensure output directory exists
         os.makedirs(os.path.dirname(full_path), exist_ok=True)
