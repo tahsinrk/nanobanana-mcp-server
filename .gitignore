@@ -46,6 +46,7 @@ Thumbs.db
 
 # Project specific
 output/
+nanobanana-images/
 temp_images/
 *.log
 *.db

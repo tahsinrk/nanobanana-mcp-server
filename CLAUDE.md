@@ -36,7 +36,7 @@ All fork changes are tagged with `(tahsinrk fork)` comments in the code.
 Upstream uses `master` branch (not `main`). The fork and upstream have unrelated git histories, so `git merge` fails. Use the "rebase from upstream" approach: create a branch from upstream/master, re-apply our customizations, then force-push to our master.
 
 ```bash
-cd "/Users/tkhan/Dropbox/Claude Code/nanobanana-mcp-server"
+cd "/Users/tkhan/Dropbox/Claude Code/claude-skills/nanobanana-mcp-server"
 git fetch upstream master
 git log upstream/master --oneline -10   # Review what changed
 git diff master..upstream/master --stat   # See which files changed
@@ -49,6 +49,6 @@ git diff master..upstream/master --stat   # See which files changed
 
 ### Output Directory
 
-Images go to `/Users/tkhan/Dropbox/Claude Code/nanobanana-images/`. Set via `IMAGE_OUTPUT_DIR` in the MCP config (`~/.claude.json`).
+Images go to `/Users/tkhan/Dropbox/Claude Code/claude-skills/nanobanana-mcp-server/nanobanana-images/`. Set via `IMAGE_OUTPUT_DIR` in the MCP config (`~/.claude.json`).
 
 For full architecture docs, dev commands, and troubleshooting, see `ARCHITECTURE.md`.
