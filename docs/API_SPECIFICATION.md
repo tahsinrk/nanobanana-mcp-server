@@ -24,7 +24,7 @@ GOOGLE_API_KEY=your_api_key
 
 ## Tools
 
-### 1. generate_image
+#### 1. generate_image
 
 **Purpose**: Generate one or more images using Gemini 2.5 Flash Image model.
 
@@ -89,7 +89,7 @@ interface GenerateImageResponse {
 - `429`: Rate limit exceeded
 - `500`: Gemini API error
 
-### 2. edit_image
+#### 2. edit_image
 
 **Purpose**: Perform precise, style-preserving edits on an image using conversational instructions.
 
@@ -134,7 +134,7 @@ interface EditImageResponse {
 }
 ```
 
-### 3. upload_file
+#### 3. upload_file
 
 **Purpose**: Upload a local file to Gemini Files API for reuse in multiple operations.
 
@@ -170,7 +170,7 @@ interface UploadFileResponse {
 
 ## Resources
 
-### 1. gemini://files/{name}
+#### 1. gemini://files/{name}
 
 **Purpose**: Retrieve metadata for files uploaded to Gemini Files API.
 
@@ -194,7 +194,7 @@ interface FileMetadataResponse {
 GET gemini://files/files%2Fabc123
 ```
 
-### 2. nano-banana://prompt-templates
+#### 2. nano-banana://prompt-templates
 
 **Purpose**: Retrieve a catalog of available prompt templates.
 
@@ -226,7 +226,7 @@ interface PromptTemplatesResponse {
 
 ## Prompts
 
-### 1. photorealistic_shot
+#### 1. photorealistic_shot
 
 **Purpose**: Generate prompts for high-quality photorealistic images.
 
@@ -257,7 +257,7 @@ interface PhotorealisticShotParams {
 "A photorealistic a vintage motorcycle. Composition: three-quarter view on empty road. Lighting: golden hour side lighting. Camera: 85mm lens, f/2.8. 16:9."
 ```
 
-### 2. logo_text
+#### 2. logo_text
 
 **Purpose**: Generate prompts for text-accurate logos.
 
@@ -272,7 +272,7 @@ interface LogoTextParams {
 }
 ```
 
-### 3. product_shot
+#### 3. product_shot
 
 **Purpose**: Generate prompts for professional product photography.
 
@@ -287,7 +287,7 @@ interface ProductShotParams {
 }
 ```
 
-### 4. sticker_flat
+#### 4. sticker_flat
 
 **Purpose**: Generate prompts for flat, kawaii-style stickers.
 
@@ -300,7 +300,7 @@ interface StickerFlatParams {
 }
 ```
 
-### 5. iterative_edit_instruction
+#### 5. iterative_edit_instruction
 
 **Purpose**: Generate structured edit instructions for image modifications.
 
@@ -312,7 +312,7 @@ interface IterativeEditInstructionParams {
 }
 ```
 
-### 6. composition_and_style_transfer
+#### 6. composition_and_style_transfer
 
 **Purpose**: Generate prompts for style transfer and composition blending.
 
@@ -327,7 +327,7 @@ interface CompositionAndStyleTransferParams {
 
 ## Data Types
 
-### ImageContent
+#### ImageContent
 
 ```typescript
 interface ImageContent {
@@ -337,7 +337,7 @@ interface ImageContent {
 }
 ```
 
-### ToolResult
+#### ToolResult
 
 ```typescript
 interface ToolResult {
@@ -346,7 +346,7 @@ interface ToolResult {
 }
 ```
 
-### Context
+#### Context
 
 ```typescript
 interface Context {
@@ -357,7 +357,7 @@ interface Context {
 
 ## Error Handling
 
-### Standard Error Responses
+#### Standard Error Responses
 
 All errors follow this structure:
 ```typescript
@@ -370,7 +370,7 @@ interface ErrorResponse {
 }
 ```
 
-### Common Error Codes
+#### Common Error Codes
 
 | Code | Description | Typical Causes |
 |------|-------------|----------------|
@@ -393,20 +393,20 @@ Actual limits may vary based on Gemini API tier and usage patterns.
 
 ## Best Practices
 
-### Prompt Engineering
+#### Prompt Engineering
 
 1. **Be Specific**: Include subject, composition, lighting, and style
 2. **Aspect Ratios**: Use text hints like "Square image" or "16:9"
 3. **Negative Prompts**: Keep concise and specific
 4. **Style Consistency**: Use system instructions for consistent tone
 
-### File Management
+#### File Management
 
 1. **Size Optimization**: Use Files API for >20MB or reused images
 2. **Format Selection**: PNG for transparency, JPEG for photographs
 3. **Metadata Tracking**: Store file identifiers for reuse
 
-### Error Handling
+#### Error Handling
 
 1. **Retry Logic**: Implement exponential backoff for rate limits
 2. **Fallback Strategies**: Have alternatives for API failures

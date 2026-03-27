@@ -6,7 +6,7 @@ Tracks knowledge base updates alongside code changes.
 
 ## 2026-02-27
 
-### v0.4.2 — NB2 routing fixes (knowledge base updated)
+#### v0.4.2 — NB2 routing fixes (knowledge base updated)
 
 **Nano Banana 2 (`gemini-3.1-flash-image-preview`) added as default model**
 
@@ -25,7 +25,7 @@ Tracks knowledge base updates alongside code changes.
 
 ---
 
-### Knowledge Base Initialized
+#### Knowledge Base Initialized
 - Created full knowledge base from v0.3.4 codebase
 - All 10 sections generated from code analysis
 
@@ -33,10 +33,10 @@ Tracks knowledge base updates alongside code changes.
 
 ## Code Versions (from CHANGELOG.md)
 
-### v0.3.4 — Current
+#### v0.3.4 — Current
 - Pro model integration refinements
 
-### v0.3.3 — 2026-01-26
+#### v0.3.3 — 2026-01-26
 - Added aspect_ratio support for Pro model
 - Added output_path support for Pro model
 - Fixed: aspect_ratio validation before API calls
@@ -44,13 +44,13 @@ Tracks knowledge base updates alongside code changes.
 - Fixed: datetime timezone awareness and hashlib security parameter
 - Contributors: @paulrobello
 
-### v0.3.2 — 2026-01-17
+#### v0.3.2 — 2026-01-17
 - Fixed: removed unsupported `output_mime_type` from `ImageConfig`
 - Changed: `ImageConfig` only created when aspect_ratio or resolution present
 - Bumped: `google-genai` requirement to `>=1.57.0` for `image_size` support
 - Contributors: @georgesung
 
-### v0.3.1 — 2026-01-08
+#### v0.3.1 — 2026-01-08
 - Added: `output_path` parameter (file path, directory path, or default)
 - Fixed: **critical** Pro model routing bug — Pro requests were always falling back to Flash
 - Fixed: removed unsupported `thinking_level` from gemini-3-pro-image-preview API call
@@ -58,13 +58,13 @@ Tracks knowledge base updates alongside code changes.
 - Fixed: default GCP region changed to `global` for Pro model support
 - Contributors: @jgeewax, @akshayvkt
 
-### v0.3.0 — 2026-01-06
+#### v0.3.0 — 2026-01-06
 - Added: Gemini 3 Pro Image support (4K, grounding, thinking levels, media resolution)
 - Added: `ModelSelector` for intelligent Flash/Pro routing
 - Added: Vertex AI / ADC authentication support
 - Added: `ProImageService`, `ModelSelectionConfig`, `ProImageConfig`
 
-### v0.2.0 — 2026-01-03
+#### v0.2.0 — 2026-01-03
 - Initial production-ready release
 - Gemini 2.5 Flash Image support
 - FastMCP framework integration

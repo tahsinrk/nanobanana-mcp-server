@@ -4,7 +4,7 @@
 
 **Nano Banana MCP Server** is a production-ready Model Context Protocol (MCP) server that brings AI-powered image generation capabilities to any MCP-compatible client through Google's Gemini 2.5 Flash Image model.
 
-### Key Value Propositions
+#### Key Value Propositions
 - **Universal Integration** - Works with Claude Desktop, Claude Code, Cursor, Continue.dev, and any MCP client
 - **Zero-Configuration** - Simple `uvx` installation with smart defaults
 - **Production-Ready** - Comprehensive error handling, logging, and validation
@@ -12,7 +12,7 @@
 
 ## 🏗️ Architecture Overview
 
-### System Architecture
+#### System Architecture
 ```mermaid
 graph TB
     Client[MCP Client<br/>Claude Desktop/Code/Cursor] --> Server[FastMCP Server]
@@ -40,7 +40,7 @@ graph TB
     Gemini --> API[Google Gemini API<br/>2.5 Flash Image]
 ```
 
-### Package Architecture
+#### Package Architecture
 - **Layered Design** - Clear separation between transport, business logic, and external services
 - **Dependency Injection** - Service registry pattern for clean dependencies
 - **Modular Components** - Tools, resources, and prompts as separate modules
@@ -48,7 +48,7 @@ graph TB
 
 ## 🔧 Technical Implementation
 
-### Core Technologies
+#### Core Technologies
 | Component | Technology | Version | Purpose |
 |-----------|------------|---------|---------|
 | **MCP Framework** | FastMCP | ≥2.11.0 | Server foundation and protocol handling |
@@ -57,7 +57,7 @@ graph TB
 | **Validation** | Pydantic | ≥2.0.0 | Data validation and serialization |
 | **Package Management** | uv | Latest | Modern Python tooling |
 
-### Development Principles
+#### Development Principles
 - **Type Safety** - Full type annotations with mypy checking
 - **Code Quality** - Ruff linting with strict rules
 - **Testing** - Comprehensive test suite with pytest
@@ -65,13 +65,13 @@ graph TB
 
 ## 📦 Package Structure
 
-### Distribution Strategy
+#### Distribution Strategy
 - **PyPI Package** - `pip install nanobanana-mcp-server`
 - **uvx Execution** - `uvx nanobanana-mcp-server@latest`
 - **Development Install** - `uv sync` for local development
 - **Console Scripts** - `nanobanana-mcp-server` and `nanobanana-mcp` commands
 
-### Build System
+#### Build System
 - **Modern Build Backend** - Hatchling with proper package configuration
 - **Automated Publishing** - Scripts for building and uploading to PyPI
 - **Version Management** - Centralized version in `__init__.py` and `pyproject.toml`
@@ -79,7 +79,7 @@ graph TB
 
 ## 🎨 Feature Implementation
 
-### Image Generation Pipeline
+#### Image Generation Pipeline
 1. **Input Validation** - Pydantic models for request validation
 2. **Prompt Processing** - Template application and enhancement
 3. **API Communication** - Gemini client with retry logic and error handling
@@ -87,14 +87,14 @@ graph TB
 5. **Storage Management** - Optional local storage with TTL cleanup
 6. **Response Formatting** - MCP-compliant tool results with mixed content
 
-### Template System
+#### Template System
 - **Photography Templates** - Professional photography prompts
 - **Design Templates** - Logo and graphic design prompts
 - **Editing Templates** - Image modification and style transfer
 - **Parameterized Prompts** - Dynamic template variables
 - **MCP Resources** - Template discovery through resource protocol
 
-### File Management
+#### File Management
 - **Gemini Files API** - Upload and manage large files
 - **Local Storage** - Temporary image storage with automatic cleanup
 - **Metadata Tracking** - File information and usage statistics
@@ -102,7 +102,7 @@ graph TB
 
 ## 🚀 Deployment Architecture
 
-### Client Integration
+#### Client Integration
 ```mermaid
 graph LR
     Desktop[Claude Desktop] --> Config[claude_desktop_config.json]
@@ -119,7 +119,7 @@ graph LR
     Server --> Storage[~/nanobanana-images]
 ```
 
-### Configuration Strategy
+#### Configuration Strategy
 - **Environment Variables** - API keys and optional settings
 - **Smart Defaults** - User home directory for storage
 - **Cross-Platform** - Works on macOS, Windows, Linux
@@ -127,13 +127,13 @@ graph LR
 
 ## 📊 Performance Characteristics
 
-### Scalability Metrics
+#### Scalability Metrics
 - **Image Generation** - ~3-5 seconds per image (Gemini API dependent)
 - **File Upload** - Limited by network speed and file size
 - **Memory Usage** - Minimal baseline, scales with concurrent requests
 - **Storage** - Local storage with automatic cleanup
 
-### Resource Management
+#### Resource Management
 - **Concurrent Requests** - Configurable limit (default: 10)
 - **Image Storage** - TTL-based cleanup (default: 1 hour)
 - **Error Recovery** - Automatic retry with exponential backoff
@@ -141,13 +141,13 @@ graph LR
 
 ## 🔒 Security Implementation
 
-### Input Validation
+#### Input Validation
 - **Pydantic Models** - Strict type validation on all inputs
 - **File Size Limits** - Configurable limits for uploads
 - **Path Sanitization** - Safe file path handling
 - **Error Sanitization** - Production mode masks sensitive information
 
-### API Security
+#### API Security
 - **Environment Variables** - API keys never hardcoded
 - **Request Validation** - All API requests validated before sending
 - **Error Handling** - Graceful degradation without information leakage
@@ -155,21 +155,21 @@ graph LR
 
 ## 🛠️ Development Workflow
 
-### Development Environment
+#### Development Environment
 1. **Clone Repository** - `git clone https://github.com/zhongweili/nanobanana-mcp-server.git`
 2. **Install Dependencies** - `uv sync`
 3. **Environment Setup** - Copy `.env.example` and add API key
 4. **Local Development** - `uv run python -m nanobanana_mcp_server.server`
 5. **Testing** - `pytest` for test suite
 
-### Quality Assurance
+#### Quality Assurance
 - **Code Formatting** - `ruff format .`
 - **Linting** - `ruff check .`
 - **Type Checking** - `mypy .`
 - **Testing** - `pytest --cov=.`
 - **Build Validation** - `uv run python scripts/build.py`
 
-### Publishing Process
+#### Publishing Process
 1. **Version Update** - Update version in `__init__.py` and `pyproject.toml`
 2. **Build Package** - `uv run python scripts/build.py`
 3. **Test Upload** - `uv run python scripts/upload.py` → TestPyPI
@@ -178,19 +178,19 @@ graph LR
 
 ## 📈 Future Roadmap
 
-### Immediate Enhancements (v0.2.0)
+#### Immediate Enhancements (v0.2.0)
 - **Image Editing Tools** - Direct image editing capabilities
 - **Batch Processing** - Multiple image generation in single request
 - **Enhanced Templates** - More specialized prompt templates
 - **Performance Optimization** - Caching and request optimization
 
-### Medium-term Goals (v0.3.0)
+#### Medium-term Goals (v0.3.0)
 - **Custom Templates** - User-defined template system
 - **Advanced Storage** - Cloud storage integration options
 - **Monitoring Dashboard** - Usage statistics and performance metrics
 - **API Extensions** - Additional Gemini model support
 
-### Long-term Vision (v1.0.0)
+#### Long-term Vision (v1.0.0)
 - **Multi-Model Support** - Integration with other AI image models
 - **Plugin System** - Extensible architecture for third-party tools
 - **Enterprise Features** - Advanced authentication and access control
@@ -198,19 +198,19 @@ graph LR
 
 ## 🎯 Success Metrics
 
-### Adoption Metrics
+#### Adoption Metrics
 - **PyPI Downloads** - Package installation statistics
 - **GitHub Stars** - Community interest and adoption
 - **Issue Resolution** - Support response and fix times
 - **Client Compatibility** - Support across MCP clients
 
-### Technical Metrics
+#### Technical Metrics
 - **Uptime** - Server stability and reliability
 - **Response Times** - Image generation and API response speeds
 - **Error Rates** - Failure rates and error recovery
 - **Resource Usage** - Memory and CPU efficiency
 
-### Quality Metrics
+#### Quality Metrics
 - **Code Coverage** - Test coverage percentage
 - **Documentation Coverage** - API and user documentation completeness
 - **User Satisfaction** - Feedback and feature requests

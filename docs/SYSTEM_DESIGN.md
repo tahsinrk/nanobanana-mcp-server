@@ -73,7 +73,7 @@ graph TB
 
 ## Core Components
 
-### 1. FastMCP Server Core
+#### 1. FastMCP Server Core
 
 **Primary Class**: `FastMCP`
 - **Responsibility**: Central server orchestration and MCP protocol handling
@@ -83,7 +83,7 @@ graph TB
   - Error handling and validation
   - Client connection management
 
-### 2. Image Generation Service
+#### 2. Image Generation Service
 
 **Component**: `ImageGenerator`
 - **Tools**: `generate_image`
@@ -99,7 +99,7 @@ graph TB
 Prompt → Gemini API → Image Bytes → MCP Image Blocks → Client
 ```
 
-### 3. Image Editing Service
+#### 3. Image Editing Service
 
 **Component**: `ImageEditor`
 - **Tools**: `edit_image`
@@ -109,7 +109,7 @@ Prompt → Gemini API → Image Bytes → MCP Image Blocks → Client
   - Precise object addition/removal
   - Lighting and perspective consistency
 
-### 4. File Management Service
+#### 4. File Management Service
 
 **Component**: `FileManager`
 - **Tools**: `upload_file`
@@ -120,7 +120,7 @@ Prompt → Gemini API → Image Bytes → MCP Image Blocks → Client
   - Reusable asset management
   - URI-based file referencing
 
-### 5. Template Engine
+#### 5. Template Engine
 
 **Component**: `TemplateEngine`
 - **Resources**: `nano-banana://prompt-templates`
@@ -132,7 +132,7 @@ Prompt → Gemini API → Image Bytes → MCP Image Blocks → Client
 
 ## API Design
 
-### Tool Interface
+#### Tool Interface
 
 ```typescript
 interface Tool {
@@ -148,7 +148,7 @@ interface ToolResult {
 }
 ```
 
-### Resource Interface
+#### Resource Interface
 
 ```typescript
 interface Resource {
@@ -157,7 +157,7 @@ interface Resource {
 }
 ```
 
-### Prompt Interface
+#### Prompt Interface
 
 ```typescript
 interface Prompt {
@@ -169,7 +169,7 @@ interface Prompt {
 
 ## Security Architecture
 
-### Authentication & Authorization
+#### Authentication & Authorization
 
 ```mermaid
 graph LR
@@ -188,7 +188,7 @@ graph LR
 3. **Error Masking**: Optional error detail concealment
 4. **Transport Security**: HTTPS for HTTP transport mode
 
-### Data Protection
+#### Data Protection
 
 - **No Persistent Storage**: Images processed in-memory only
 - **SynthID Tracking**: Watermark metadata for provenance
@@ -197,7 +197,7 @@ graph LR
 
 ## Performance Characteristics
 
-### Throughput Capacity
+#### Throughput Capacity
 
 | Operation | Expected Latency | Concurrent Users | Memory Usage |
 |-----------|------------------|------------------|--------------|
@@ -208,7 +208,7 @@ graph LR
 
 *Depends on file size and network conditions
 
-### Scalability Considerations
+#### Scalability Considerations
 
 **Horizontal Scaling**:
 - Stateless server design enables load balancing
@@ -222,7 +222,7 @@ graph LR
 
 ## Configuration Management
 
-### Environment Variables
+#### Environment Variables
 
 ```bash
 # Required
@@ -237,7 +237,7 @@ FASTMCP_PORT=9000
 FASTMCP_MASK_ERRORS=true|false
 ```
 
-### Runtime Configuration
+#### Runtime Configuration
 
 ```python
 mcp = FastMCP(
@@ -249,7 +249,7 @@ mcp = FastMCP(
 
 ## Deployment Architecture
 
-### Local Development
+#### Local Development
 
 ```mermaid
 graph LR
@@ -273,7 +273,7 @@ export GEMINI_API_KEY=your_key
 uv run python server.py
 ```
 
-### FastMCP Native Deployment
+#### FastMCP Native Deployment
 
 **STDIO Mode (Default)**:
 ```bash
@@ -329,14 +329,14 @@ pm2 start "uv run python server.py" --name nanobanana-mcp-server
 
 ## Error Handling Strategy
 
-### Error Categories
+#### Error Categories
 
 1. **Configuration Errors**: Missing API keys, invalid settings
 2. **API Errors**: Gemini service failures, rate limits
 3. **Validation Errors**: Invalid parameters, malformed requests
 4. **Runtime Errors**: Memory issues, network failures
 
-### Recovery Mechanisms
+#### Recovery Mechanisms
 
 ```python
 def handle_gemini_error(error):
@@ -350,7 +350,7 @@ def handle_gemini_error(error):
 
 ## Quality Assurance
 
-### Testing Strategy
+#### Testing Strategy
 
 **Unit Tests**:
 - Tool parameter validation
@@ -370,7 +370,7 @@ def handle_gemini_error(error):
 - Large file processing
 - Rate limit validation
 
-### Monitoring & Observability
+#### Monitoring & Observability
 
 **Key Metrics**:
 - Request latency distribution
@@ -387,7 +387,7 @@ def handle_gemini_error(error):
 
 ## Future Enhancements
 
-### Phase 2 Features
+#### Phase 2 Features
 
 1. **Batch Processing**: Multiple image operations in single request
 2. **Caching Layer**: Intelligent result caching for common prompts
@@ -395,7 +395,7 @@ def handle_gemini_error(error):
 4. **Advanced Templates**: User-defined prompt templates
 5. **Analytics Dashboard**: Usage metrics and insights
 
-### Scalability Improvements
+#### Scalability Improvements
 
 1. **Distributed Processing**: Queue-based async processing
 2. **CDN Integration**: Global image delivery optimization

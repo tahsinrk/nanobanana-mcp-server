@@ -15,13 +15,13 @@ I’ve grounded key choices with official docs—citations follow each relevant 
 > * optional `.env` (to hold `GEMINI_API_KEY`)
 > * `pyproject.toml` (dependencies and project config)
 
-### `.env`
+#### `.env`
 
 ```
 GEMINI_API_KEY=YOUR_API_KEY
 ```
 
-### `server.py`
+#### `server.py`
 
 ```python
 import os
@@ -391,7 +391,7 @@ FastMCP defaults to STDIO transport; MCP clients can connect immediately. For HT
 
 ---
 
-### What you can add next
+#### What you can add next
 
 * **Auth & rate-limit guards** (wrap Gemini calls and shape exceptions; consider `mask_error_details=True` during server creation for safer errors).
 * **HTTP transport** + `/health` route for remote deployments.

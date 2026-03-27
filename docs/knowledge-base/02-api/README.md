@@ -4,7 +4,7 @@ This server exposes its API via the MCP protocol (STDIO or HTTP transport).
 
 ## Tools
 
-### `generate_image` (primary tool)
+#### `generate_image` (primary tool)
 File: `nanobanana_mcp_server/tools/generate_image.py`
 
 Handles generation, editing, and multi-image conditioning in one unified tool.
@@ -47,21 +47,21 @@ Handles generation, editing, and multi-image conditioning in one unified tool.
 
 ---
 
-### `upload_file`
+#### `upload_file`
 File: `nanobanana_mcp_server/tools/upload_file.py`
 
 Upload a local file to Gemini Files API. Returns a `file_id` for use with `generate_image`.
 
 ---
 
-### `output_stats`
+#### `output_stats`
 File: `nanobanana_mcp_server/tools/output_stats.py`
 
 Display statistics about the output directory and recently generated images.
 
 ---
 
-### `maintenance`
+#### `maintenance`
 File: `nanobanana_mcp_server/tools/maintenance.py`
 
 Run maintenance operations:

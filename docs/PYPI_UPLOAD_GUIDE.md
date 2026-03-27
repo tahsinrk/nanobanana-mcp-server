@@ -106,13 +106,13 @@ fastmcp dev nanobanana-mcp-server
 
 ## Troubleshooting
 
-### Common Issues
+#### Common Issues
 
 1. **Import Errors**: Ensure all dependencies are listed in `pyproject.toml`
 2. **Entry Point Issues**: Verify the console scripts point to the correct module paths
 3. **Version Conflicts**: Check for version conflicts with existing packages
 
-### Authentication Issues
+#### Authentication Issues
 
 ```bash
 # Configure PyPI token
@@ -132,7 +132,7 @@ username = __token__
 password = pypi-your-test-token
 ```
 
-### Version Updates
+#### Version Updates
 
 To upload a new version:
 

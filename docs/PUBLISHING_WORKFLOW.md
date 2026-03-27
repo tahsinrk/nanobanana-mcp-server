@@ -4,13 +4,13 @@ This is a streamlined, reusable workflow for publishing Python packages to PyPI 
 
 ## 🚀 Quick Publishing Workflow
 
-### One-Command Publishing
+#### One-Command Publishing
 ```bash
 # Build and upload in one go (recommended)
 uv run python scripts/build.py && uv run python scripts/upload.py
 ```
 
-### Step-by-Step Workflow
+#### Step-by-Step Workflow
 ```bash
 # 1. Build the package
 uv run python scripts/build.py
@@ -23,13 +23,13 @@ uv run python scripts/upload.py
 
 ## 📋 Prerequisites Checklist
 
-### One-Time Setup
+#### One-Time Setup
 - [ ] PyPI account created: https://pypi.org/account/register/
 - [ ] TestPyPI account created: https://test.pypi.org/account/register/
 - [ ] API tokens generated for both accounts
 - [ ] `~/.pypirc` file configured (see configuration below)
 
-### Before Each Release
+#### Before Each Release
 - [ ] Version updated in `pyproject.toml`
 - [ ] Version updated in `nanobanana_mcp_server/__init__.py`
 - [ ] CHANGELOG updated (if you maintain one)
@@ -39,7 +39,7 @@ uv run python scripts/upload.py
 
 ## ⚙️ Configuration
 
-### ~/.pypirc Configuration
+#### ~/.pypirc Configuration
 Create `~/.pypirc` in your home directory:
 
 ```ini
@@ -58,7 +58,7 @@ username = __token__
 password = pypi-your-test-token-here
 ```
 
-### Getting API Tokens
+#### Getting API Tokens
 1. **TestPyPI Token**: https://test.pypi.org/manage/account/token/
    - Create token with scope "Entire account"
    - Copy token (starts with `pypi-`)
@@ -77,7 +77,7 @@ The automated build script (`scripts/build.py`) includes:
 - ✅ **Size Reporting**: Shows package sizes after build
 - ✅ **Error Handling**: Clear error messages and troubleshooting hints
 
-### Build Script Usage
+#### Build Script Usage
 ```bash
 # Standard build
 uv run python scripts/build.py
@@ -103,7 +103,7 @@ The automated upload script (`scripts/upload.py`) includes:
 - ✅ **Safety Confirmation**: Requires confirmation for production uploads
 - ✅ **Next Steps Guidance**: Shows installation commands after upload
 
-### Upload Script Usage
+#### Upload Script Usage
 ```bash
 # Interactive upload
 uv run python scripts/upload.py
@@ -117,7 +117,7 @@ uv run python scripts/upload.py
 
 ## 🧪 Testing Workflow
 
-### 1. Test on TestPyPI First
+#### 1. Test on TestPyPI First
 ```bash
 # Build and upload to TestPyPI
 uv run python scripts/build.py
@@ -125,7 +125,7 @@ uv run python scripts/upload.py
 # Choose option 1 (TestPyPI)
 ```
 
-### 2. Test Installation from TestPyPI
+#### 2. Test Installation from TestPyPI
 ```bash
 # Test with uvx (recommended)
 uvx --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ nanobanana-mcp-server
@@ -135,7 +135,7 @@ nanobanana-mcp-server --help
 nanobanana-mcp --help
 ```
 
-### 3. If Testing Passes, Upload to Production
+#### 3. If Testing Passes, Upload to Production
 ```bash
 uv run python scripts/upload.py
 # Choose option 2 (PyPI)
@@ -144,7 +144,7 @@ uv run python scripts/upload.py
 
 ## 🔄 Version Management
 
-### Updating Version for New Release
+#### Updating Version for New Release
 ```bash
 # 1. Update version in pyproject.toml
 # From: version = "0.1.0"  
@@ -159,7 +159,7 @@ uv run python scripts/build.py
 uv run python scripts/upload.py
 ```
 
-### Semantic Versioning Guidelines
+#### Semantic Versioning Guidelines
 - **Patch** (0.1.0 → 0.1.1): Bug fixes, minor improvements
 - **Minor** (0.1.0 → 0.2.0): New features, backward compatible
 - **Major** (0.1.0 → 1.0.0): Breaking changes
@@ -177,7 +177,7 @@ Both files are uploaded to PyPI for maximum compatibility.
 
 ## 🚨 Troubleshooting
 
-### Common Issues and Solutions
+#### Common Issues and Solutions
 
 **Issue**: `uv not found`
 ```bash

@@ -11,7 +11,7 @@ File: `nanobanana_mcp_server/services/image_storage_service.py`
 - **Naming:** Single image → `image.png`; multiple → `image.png`, `image_2.png`, `image_3.png`
 - **Thumbnails:** Created by Pillow; if thumbnail creation fails, returns full image (graceful degradation — fixed in v0.3.3)
 
-### Output Path Modes
+#### Output Path Modes
 
 | Input | Behavior |
 |-------|---------|

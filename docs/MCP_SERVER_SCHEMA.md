@@ -6,7 +6,7 @@ The Nano Banana MCP Server is a production-ready FastMCP server that provides AI
 
 ## Server Configuration
 
-### Server Metadata
+#### Server Metadata
 ```json
 {
   "name": "nanobanana-mcp-server",
@@ -17,7 +17,7 @@ The Nano Banana MCP Server is a production-ready FastMCP server that provides AI
 }
 ```
 
-### Environment Configuration
+#### Environment Configuration
 ```bash
 # Required
 GEMINI_API_KEY=your_api_key_here
@@ -35,7 +35,7 @@ IMAGE_OUTPUT_DIR=output
 
 ## MCP Tools Schema
 
-### 1. generate_image
+#### 1. generate_image
 
 **Purpose**: Generate new images or edit existing images using natural language instructions
 
@@ -148,7 +148,7 @@ interface GenerateImageResponse {
 }
 ```
 
-### 2. upload_file
+#### 2. upload_file
 
 **Purpose**: Upload a local file through the Gemini Files API
 
@@ -200,7 +200,7 @@ interface UploadFileResponse {
 }
 ```
 
-### 3. output_stats
+#### 3. output_stats
 
 **Purpose**: Get statistics about generated images and Files API usage
 
@@ -223,7 +223,7 @@ interface OutputStatsTool {
 }
 ```
 
-### 4. maintenance
+#### 4. maintenance
 
 **Purpose**: Perform maintenance operations on images and Files API
 
@@ -256,7 +256,7 @@ interface MaintenanceTool {
 
 ## MCP Resources Schema
 
-### 1. File Metadata Resource
+#### 1. File Metadata Resource
 
 **URI Pattern**: `gemini://files/{name}`
 
@@ -287,7 +287,7 @@ interface FileMetadataResponse {
 }
 ```
 
-### 2. Template Catalog Resource
+#### 2. Template Catalog Resource
 
 **URI Pattern**: `gemini://templates/catalog`
 
@@ -334,7 +334,7 @@ interface TemplateCatalogResponse {
 }
 ```
 
-### 3. Operation Status Resources
+#### 3. Operation Status Resources
 
 **URI Pattern**: `gemini://operations/{operation_id}/progress`
 
@@ -349,7 +349,7 @@ interface OperationStatusResource {
 }
 ```
 
-### 4. Stored Images Resource
+#### 4. Stored Images Resource
 
 **URI Pattern**: `gemini://images/{image_id}/{type}`
 
@@ -369,9 +369,9 @@ interface StoredImagesResource {
 
 ## MCP Prompts Schema
 
-### Photography Prompts
+#### Photography Prompts
 
-#### 1. photorealistic_shot
+##### 1. photorealistic_shot
 
 **Schema**:
 ```typescript
@@ -408,9 +408,9 @@ interface PhotorealisticShotPrompt {
 }
 ```
 
-### Design Prompts
+#### Design Prompts
 
-#### 1. logo_text
+##### 1. logo_text
 
 **Schema**:
 ```typescript
@@ -427,7 +427,7 @@ interface LogoTextPrompt {
 }
 ```
 
-#### 2. product_shot
+##### 2. product_shot
 
 **Schema**:
 ```typescript
@@ -444,7 +444,7 @@ interface ProductShotPrompt {
 }
 ```
 
-#### 3. sticker_flat
+##### 3. sticker_flat
 
 **Schema**:
 ```typescript
@@ -460,9 +460,9 @@ interface StickerFlatPrompt {
 }
 ```
 
-### Editing Prompts
+#### Editing Prompts
 
-#### 1. iterative_edit_instruction
+##### 1. iterative_edit_instruction
 
 **Schema**:
 ```typescript
@@ -477,7 +477,7 @@ interface IterativeEditPrompt {
 }
 ```
 
-#### 2. composition_and_style_transfer
+##### 2. composition_and_style_transfer
 
 **Schema**:
 ```typescript
@@ -496,19 +496,19 @@ interface CompositionStyleTransferPrompt {
 
 ## Server Lifecycle
 
-### Initialization Sequence
+#### Initialization Sequence
 1. **Environment Validation**: Check required API keys and configuration
 2. **Service Registration**: Initialize all services with dependency injection
 3. **Component Registration**: Register tools, resources, and prompts
 4. **Server Ready**: FastMCP server ready to handle requests
 
-### Request Processing
+#### Request Processing
 1. **Input Validation**: Validate all parameters against schema
 2. **Service Execution**: Execute business logic through service layer
 3. **Response Formation**: Format response according to MCP specification
 4. **Error Handling**: Structured error responses with appropriate logging
 
-### Error Response Schema
+#### Error Response Schema
 ```typescript
 interface ErrorResponse {
   error: "validation_error" | "file_operation_error" | "api_error" | "unexpected_error";
@@ -521,7 +521,7 @@ interface ErrorResponse {
 
 ## Usage Examples
 
-### Image Generation
+#### Image Generation
 ```json
 {
   "method": "tools/call",
@@ -536,7 +536,7 @@ interface ErrorResponse {
 }
 ```
 
-### File Upload
+#### File Upload
 ```json
 {
   "method": "tools/call", 
@@ -550,7 +550,7 @@ interface ErrorResponse {
 }
 ```
 
-### Prompt Template Usage
+#### Prompt Template Usage
 ```json
 {
   "method": "prompts/get",

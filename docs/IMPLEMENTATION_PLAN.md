@@ -6,7 +6,7 @@ This document outlines a phased implementation plan for building the production-
 
 ## Current State Assessment
 
-### Existing Assets ✅
+#### Existing Assets ✅
 - Complete FastMCP server skeleton (`docs/fastmcp-skeleton.md`)
 - API design specification (`docs/mcp-server-design-01.md`)
 - System architecture design (`SYSTEM_DESIGN.md`)
@@ -14,7 +14,7 @@ This document outlines a phased implementation plan for building the production-
 - Component design (`COMPONENT_DESIGN.md`)
 - Development guidance (`CLAUDE.md`)
 
-### Missing Components 🔄
+#### Missing Components 🔄
 - Modular code structure
 - Comprehensive error handling
 - Input validation
@@ -27,14 +27,14 @@ This document outlines a phased implementation plan for building the production-
 
 ## Phase 1: Foundation & Refactoring (Week 1)
 
-### Objectives
+#### Objectives
 - Refactor monolithic skeleton into modular components
 - Implement basic error handling and validation
 - Set up development environment
 
-### Tasks
+#### Tasks
 
-#### 1.1 Project Structure Setup
+##### 1.1 Project Structure Setup
 ```bash
 # Initialize project with uv
 uv init --python 3.11
@@ -56,7 +56,7 @@ touch {config,core,services,tools,resources,prompts,utils,tests}/__init__.py
 - [ ] `pyproject.toml` configured with uv dependencies
 - [ ] `ruff.toml` configuration for linting and formatting
 
-#### 1.2 Configuration Management
+##### 1.2 Configuration Management
 **Files:** `config/settings.py`, `config/constants.py`
 
 ```python
@@ -72,7 +72,7 @@ touch {config,core,services,tools,resources,prompts,utils,tests}/__init__.py
 - [ ] Configuration validation
 - [ ] `.env.example` file
 
-#### 1.3 Core Server Refactoring
+##### 1.3 Core Server Refactoring
 **Files:** `core/server.py`, `core/exceptions.py`
 
 **Tasks:**
@@ -81,7 +81,7 @@ touch {config,core,services,tools,resources,prompts,utils,tests}/__init__.py
 - [ ] Add custom exception classes
 - [ ] Basic logging setup
 
-#### 1.4 Service Layer Implementation
+##### 1.4 Service Layer Implementation
 **Files:** `services/gemini_client.py`, `services/image_service.py`
 
 **Tasks:**
@@ -98,14 +98,14 @@ touch {config,core,services,tools,resources,prompts,utils,tests}/__init__.py
 
 ## Phase 2: Core Functionality (Week 2)
 
-### Objectives
+#### Objectives
 - Implement all tools, resources, and prompts
 - Add comprehensive input validation
 - Implement structured logging
 
-### Tasks
+#### Tasks
 
-#### 2.1 Tool Implementation
+##### 2.1 Tool Implementation
 **Files:** `tools/generate_image.py`, `tools/edit_image.py`, `tools/upload_file.py`
 
 **Tasks:**
@@ -115,7 +115,7 @@ touch {config,core,services,tools,resources,prompts,utils,tests}/__init__.py
 - [ ] Add parameter validation with Pydantic
 - [ ] Implement proper error responses
 
-#### 2.2 Resource Implementation
+##### 2.2 Resource Implementation
 **Files:** `resources/file_metadata.py`, `resources/template_catalog.py`
 
 **Tasks:**
@@ -124,7 +124,7 @@ touch {config,core,services,tools,resources,prompts,utils,tests}/__init__.py
 - [ ] Add resource caching mechanism
 - [ ] Error handling for missing resources
 
-#### 2.3 Prompt Implementation
+##### 2.3 Prompt Implementation
 **Files:** `prompts/photography.py`, `prompts/design.py`, `prompts/editing.py`
 
 **Tasks:**
@@ -133,7 +133,7 @@ touch {config,core,services,tools,resources,prompts,utils,tests}/__init__.py
 - [ ] Add parameter validation
 - [ ] Create prompt testing utilities
 
-#### 2.4 Utility Enhancements
+##### 2.4 Utility Enhancements
 **Files:** `utils/image_utils.py`, `utils/validation_utils.py`, `utils/logging_utils.py`
 
 **Tasks:**
@@ -150,14 +150,14 @@ touch {config,core,services,tools,resources,prompts,utils,tests}/__init__.py
 
 ## Phase 3: Production Features (Week 3)
 
-### Objectives
+#### Objectives
 - Add production-ready features
 - Implement monitoring and health checks
 - Performance optimizations
 
-### Tasks
+#### Tasks
 
-#### 3.1 Advanced Error Handling
+##### 3.1 Advanced Error Handling
 **Files:** `core/middleware.py`, `core/exceptions.py`
 
 **Tasks:**
@@ -167,7 +167,7 @@ touch {config,core,services,tools,resources,prompts,utils,tests}/__init__.py
 - [ ] Rate limiting implementation
 - [ ] Request timeout handling
 
-#### 3.2 Health & Monitoring
+##### 3.2 Health & Monitoring
 **Files:** `core/health.py`, `utils/metrics.py`
 
 **Tasks:**
@@ -177,7 +177,7 @@ touch {config,core,services,tools,resources,prompts,utils,tests}/__init__.py
 - [ ] Resource usage tracking
 - [ ] API quota monitoring
 
-#### 3.3 Security Enhancements
+##### 3.3 Security Enhancements
 **Files:** `core/security.py`, `utils/validation_utils.py`
 
 **Tasks:**
@@ -187,7 +187,7 @@ touch {config,core,services,tools,resources,prompts,utils,tests}/__init__.py
 - [ ] CORS configuration for HTTP mode
 - [ ] Security headers implementation
 
-#### 3.4 Performance Optimizations
+##### 3.4 Performance Optimizations
 **Files:** `services/cache_service.py`, `utils/performance.py`
 
 **Tasks:**
@@ -205,14 +205,14 @@ touch {config,core,services,tools,resources,prompts,utils,tests}/__init__.py
 
 ## Phase 4: Testing & Quality Assurance (Week 4)
 
-### Objectives
+#### Objectives
 - Comprehensive test coverage
 - Integration testing
 - Performance testing
 
-### Tasks
+#### Tasks
 
-#### 4.1 Unit Testing
+##### 4.1 Unit Testing
 **Files:** `tests/test_*.py`
 
 **Test Categories:**
@@ -225,7 +225,7 @@ touch {config,core,services,tools,resources,prompts,utils,tests}/__init__.py
 
 **Coverage Target:** 90%+
 
-#### 4.2 Integration Testing
+##### 4.2 Integration Testing
 **Files:** `tests/integration/test_*.py`
 
 **Test Categories:**
@@ -235,7 +235,7 @@ touch {config,core,services,tools,resources,prompts,utils,tests}/__init__.py
 - [ ] Error handling scenarios
 - [ ] Multi-step workflows
 
-#### 4.3 Performance Testing
+##### 4.3 Performance Testing
 **Files:** `tests/performance/test_*.py`
 
 **Test Categories:**
@@ -245,7 +245,7 @@ touch {config,core,services,tools,resources,prompts,utils,tests}/__init__.py
 - [ ] API rate limit testing
 - [ ] Stress testing
 
-#### 4.4 Quality Assurance
+##### 4.4 Quality Assurance
 **Tools:** `pytest`, `coverage`, `mypy`, `black`, `flake8`
 
 **Tasks:**
@@ -263,14 +263,14 @@ touch {config,core,services,tools,resources,prompts,utils,tests}/__init__.py
 
 ## Phase 5: Deployment & Documentation (Week 5)
 
-### Objectives
+#### Objectives
 - FastMCP native deployment setup
 - Comprehensive documentation
 - User guides and examples
 
-### Tasks
+#### Tasks
 
-#### 5.1 FastMCP Deployment Setup
+##### 5.1 FastMCP Deployment Setup
 **Files:** `systemd/`, `scripts/`
 
 **Tasks:**
@@ -280,7 +280,7 @@ touch {config,core,services,tools,resources,prompts,utils,tests}/__init__.py
 - [ ] Environment configuration templates
 - [ ] Health monitoring setup
 
-#### 5.2 Documentation
+##### 5.2 Documentation
 **Files:** `docs/`
 
 **Documentation Types:**
@@ -291,7 +291,7 @@ touch {config,core,services,tools,resources,prompts,utils,tests}/__init__.py
 - [ ] Troubleshooting guide
 - [ ] Performance tuning guide
 
-#### 5.3 Examples & Tutorials
+##### 5.3 Examples & Tutorials
 **Files:** `examples/`
 
 **Examples:**
@@ -309,9 +309,9 @@ touch {config,core,services,tools,resources,prompts,utils,tests}/__init__.py
 
 ## Development Guidelines
 
-### Code Quality Standards
+#### Code Quality Standards
 
-#### Style & Formatting (Using Ruff)
+##### Style & Formatting (Using Ruff)
 ```bash
 # Code formatting and linting with ruff
 uv run ruff format src/ tests/
@@ -324,7 +324,7 @@ uv run mypy src/
 uv run pytest tests/ --cov=src/ --cov-report=html
 ```
 
-#### Commit Standards
+##### Commit Standards
 ```
 feat: add image generation caching
 fix: handle API timeout errors
@@ -333,9 +333,9 @@ test: add integration tests for file upload
 refactor: extract validation utilities
 ```
 
-### Development Workflow
+#### Development Workflow
 
-#### 1. Feature Development
+##### 1. Feature Development
 ```bash
 git checkout -b feature/image-caching
 
@@ -354,7 +354,7 @@ uv run pytest tests/ --cov=src/
 git commit -m "feat: implement image result caching"
 ```
 
-#### 2. Code Review Checklist
+##### 2. Code Review Checklist
 - [ ] Functionality works as specified
 - [ ] Tests written and passing
 - [ ] Ruff formatting and linting pass
@@ -364,7 +364,7 @@ git commit -m "feat: implement image result caching"
 - [ ] Performance impact assessed
 - [ ] Security considerations reviewed
 
-#### 3. Integration Process
+##### 3. Integration Process
 ```bash
 # Run full test suite
 uv run pytest tests/ --cov=src/ --cov-report=html
@@ -386,19 +386,19 @@ git checkout main && git merge feature/image-caching
 
 ## Resource Planning
 
-### Team Requirements
+#### Team Requirements
 - **Backend Developer**: Python/FastAPI expertise
 - **DevOps Engineer**: Docker/Kubernetes deployment
 - **QA Engineer**: Testing automation
 - **Technical Writer**: Documentation
 
-### Infrastructure Requirements
+#### Infrastructure Requirements
 - **Development**: Local Docker environment
 - **Testing**: CI/CD pipeline (GitHub Actions)
 - **Production**: Container orchestration platform
 - **Monitoring**: Logging and metrics infrastructure
 
-### Timeline Summary
+#### Timeline Summary
 
 | Phase | Duration | Key Deliverables |
 |-------|----------|------------------|
@@ -413,39 +413,39 @@ git checkout main && git merge feature/image-caching
 
 ## Success Metrics
 
-### Functionality Metrics
+#### Functionality Metrics
 - ✅ All tools, resources, and prompts working
 - ✅ 100% API specification compliance
 - ✅ Error handling for all edge cases
 
-### Quality Metrics
+#### Quality Metrics
 - ✅ 90%+ test coverage
 - ✅ Zero security vulnerabilities
 - ✅ All code quality checks passing
 
-### Performance Metrics
+#### Performance Metrics
 - ✅ <5s average image generation time
 - ✅ Support for 20+ concurrent users
 - ✅ <100MB memory usage per instance
 
-### Production Readiness
+#### Production Readiness
 - ✅ Automated deployment pipeline
 - ✅ Comprehensive monitoring
 - ✅ Complete documentation
 
 ## Risk Mitigation
 
-### Technical Risks
+#### Technical Risks
 1. **Gemini API Changes**: Monitor API documentation, implement version detection
 2. **Performance Issues**: Early performance testing, profiling tools
 3. **Security Vulnerabilities**: Regular security scanning, dependency updates
 
-### Schedule Risks
+#### Schedule Risks
 1. **Scope Creep**: Strict phase definitions, change control
 2. **Dependencies**: Parallel development where possible
 3. **Integration Issues**: Early integration testing
 
-### Quality Risks
+#### Quality Risks
 1. **Test Coverage**: Automated coverage reporting, quality gates
 2. **Documentation Gaps**: Documentation reviews, user feedback
 3. **Production Issues**: Staged deployment, rollback procedures

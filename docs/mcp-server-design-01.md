@@ -4,7 +4,7 @@ Below is a concise “contract” for each component so any MCP client (Cursor, 
 
 ## Tools
 
-### 1) `generate_image`
+#### 1) `generate_image`
 
 * **Purpose:** Create one or more images with Gemini 2.5 Flash Image (“nano banana”).
 * **Params**
@@ -25,7 +25,7 @@ Below is a concise “contract” for each component so any MCP client (Cursor, 
   * The model produces interleaved text & images; we extract image `inline_data` parts. ([Google AI for Developers][6])
   * All output images carry a **SynthID** watermark. ([Google AI for Developers][5])
 
-### 2) `edit_image`
+#### 2) `edit_image`
 
 * **Purpose:** Precise, **conversational** editing (add/remove/mask/change) while preserving original style & lighting. ([Google AI for Developers][6])
 * **Params**
@@ -41,7 +41,7 @@ Below is a concise “contract” for each component so any MCP client (Cursor, 
 
   * The edit instruction style mirrors official templates for “Adding/removing elements”, “In-painting”, etc. ([Google AI for Developers][6])
 
-### 3) `upload_file`
+#### 3) `upload_file`
 
 * **Purpose:** Upload a local file to Gemini **Files API** and get a reusable `uri` (better for large inputs or repeated use).
 * **Params**
@@ -53,13 +53,13 @@ Below is a concise “contract” for each component so any MCP client (Cursor, 
 
 ## Resources
 
-### `gemini://files/{name}`
+#### `gemini://files/{name}`
 
 * **Purpose:** Fetch **Files API** metadata by `name` (e.g., `files/abc123`).
 * **Returns:** `{ name, uri, mime_type, size_bytes }`
 * **Rationale:** Gives clients a stable way to introspect file handles they plan to reuse across prompts. ([Google AI for Developers][3])
 
-### `nano-banana://prompt-templates`
+#### `nano-banana://prompt-templates`
 
 * **Purpose:** A machine-readable catalog of prompt templates (the same as the server’s `@mcp.prompt` items).
 * **Returns:** A JSON dictionary listing the template names, descriptions, and parameter lists.

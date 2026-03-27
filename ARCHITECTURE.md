@@ -8,7 +8,7 @@ This file contains the full architecture documentation and development reference
 
 This repository contains a production-ready **Nano Banana MCP Server** - an AI-powered image generation and editing server that leverages Google's Gemini models through the FastMCP framework. The codebase implements a complete MCP (Model Context Protocol) server with modular architecture, comprehensive error handling, and production-ready features.
 
-### Nano Banana Pro Integration
+#### Nano Banana Pro Integration
 
 The server now supports **Gemini 3 Pro Image** (Google's latest and most advanced image generation model) alongside the existing Gemini 2.5 Flash Image model:
 
@@ -26,7 +26,7 @@ The server now supports **Gemini 3 Pro Image** (Google's latest and most advance
 
 ## Development Commands
 
-### Environment Setup
+#### Environment Setup
 ```bash
 # Using uv (recommended)
 uv sync
@@ -36,7 +36,7 @@ cp .env.example .env
 # Edit .env to add your GEMINI_API_KEY
 ```
 
-### Running the Server
+#### Running the Server
 ```bash
 # FastMCP CLI (recommended for development)
 # Note: Use mcp_dev.py wrapper to resolve relative import issues
@@ -49,7 +49,7 @@ python -m nanobanana_mcp_server.server
 FASTMCP_TRANSPORT=http python -m nanobanana_mcp_server.server
 ```
 
-### Development Workflow
+#### Development Workflow
 ```bash
 # Start development server (clean startup)
 ./scripts/cleanup-ports.sh && fastmcp dev nanobanana_mcp_server.server:create_app
@@ -72,7 +72,7 @@ pytest -m integration
 
 ## Architecture & Implementation
 
-### Core Architecture Pattern
+#### Core Architecture Pattern
 
 The codebase follows a **layered architecture** with clear separation of concerns:
 
@@ -85,7 +85,7 @@ The codebase follows a **layered architecture** with clear separation of concern
 7. **Configuration Layer** (`config/`) - Settings management and environment handling
 8. **Utilities Layer** (`utils/`) - Shared utilities and helper functions
 
-### Key Components
+#### Key Components
 
 **Server Factory Pattern** (`server.py:create_app()`):
 - Factory function used by FastMCP CLI: `fastmcp dev server:create_app`
@@ -106,7 +106,7 @@ The codebase follows a **layered architecture** with clear separation of concern
 - Resources: Registered via `register_*_resource()` functions
 - Prompts: Organized by category (photography, design, editing) with registration functions
 
-### Configuration Management
+#### Configuration Management
 
 **Environment-Based Configuration** (`config/settings.py`):
 - `ServerConfig`: Server transport, host, port, error masking
@@ -131,7 +131,7 @@ The codebase follows a **layered architecture** with clear separation of concern
 2. `.env` file values
 3. Default values in dataclass definitions
 
-### Dependency Management
+#### Dependency Management
 
 **Key Dependencies**:
 - `fastmcp>=2.11.0`: MCP server framework
@@ -145,7 +145,7 @@ The codebase follows a **layered architecture** with clear separation of concern
 - `pytest`: Testing framework with async support
 - `pytest-cov`: Coverage reporting
 
-### Error Handling Strategy
+#### Error Handling Strategy
 
 **Layered Error Handling**:
 1. **Configuration Errors**: Fail fast at startup with clear messages
@@ -158,7 +158,7 @@ The codebase follows a **layered architecture** with clear separation of concern
 - Context preservation for debugging
 - User-friendly error messages vs internal logging
 
-### Image Processing Pipeline
+#### Image Processing Pipeline
 
 **Generation Flow with Model Selection**:
 1. Input validation and sanitization (`core/validation.py`)
@@ -189,7 +189,7 @@ The codebase follows a **layered architecture** with clear separation of concern
 6. Optional storage with thumbnails
 7. Result packaging with edit metadata (includes model tier)
 
-### Model Selection Logic
+#### Model Selection Logic
 
 **Intelligent Routing** (`services/model_selector.py`):
 
@@ -231,7 +231,7 @@ images, metadata = service.generate_images(...)
 - `get_model_info(tier)`: Returns detailed model capabilities and metadata
 - Used for logging and user feedback
 
-### Testing Architecture
+#### Testing Architecture
 
 **Test Categories** (configured in `pyproject.toml`):
 - `unit`: Fast, isolated unit tests
@@ -244,7 +244,7 @@ images, metadata = service.generate_images(...)
 - Excludes test files, `__init__.py`, and debugging code
 - HTML coverage reports generated in `htmlcov/`
 
-### FastMCP Integration Patterns
+#### FastMCP Integration Patterns
 
 **Tool Registration Pattern**:
 ```python
@@ -273,25 +273,25 @@ def register_photography_prompts(server: FastMCP):
 
 ## Production Considerations
 
-### Logging Configuration
+#### Logging Configuration
 - Structured logging with configurable formats (standard/json/detailed)
 - Log levels: DEBUG, INFO, WARNING, ERROR
 - Request correlation and performance timing
 - Sensitive data filtering (API keys, user content)
 
-### Security Features
+#### Security Features
 - Input validation and sanitization
 - API key protection in logs and error messages
 - File size limits and type validation
 - Error message masking for production (`mask_error_details`)
 
-### Performance Optimizations
+#### Performance Optimizations
 - Async/await patterns for I/O operations
 - Connection pooling and reuse
 - Image processing optimizations
 - Memory management for large files
 
-### Deployment Support
+#### Deployment Support
 - Docker containerization ready
 - Environment-based configuration
 - Process management compatibility (systemd, PM2)
@@ -299,7 +299,7 @@ def register_photography_prompts(server: FastMCP):
 
 ## Common Issues & Troubleshooting
 
-### FastMCP Development Issues
+#### FastMCP Development Issues
 
 **Port Conflicts**:
 ```bash
@@ -326,7 +326,7 @@ pkill -f "fastmcp.*nanobanana_mcp_server.server"
 - **Fixed**: Updated FastMCP imports from `fastmcp.Image` to `fastmcp.utilities.types.Image`
 - **Fixed**: Updated Pydantic field constraints from `max_items` to `max_length`
 
-### Runtime Configuration
+#### Runtime Configuration
 
 **API Key Setup**:
 ```bash

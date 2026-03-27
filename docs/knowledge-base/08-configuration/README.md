@@ -4,7 +4,7 @@ All configuration is environment-variable based. Copy `.env.example` → `.env` 
 
 ## Environment Variables
 
-### Authentication (Required — one method must be set)
+#### Authentication (Required — one method must be set)
 
 | Variable | Description | Example |
 |----------|-------------|---------|
@@ -14,20 +14,20 @@ All configuration is environment-variable based. Copy `.env.example` → `.env` 
 | `GCP_PROJECT_ID` | GCP project for Vertex AI | `my-project-123` |
 | `GCP_REGION` | GCP region (**must be `global` for Pro model**) | `global` |
 
-### Model Selection
+#### Model Selection
 
 | Variable | Default | Options |
 |----------|---------|---------|
 | `NANOBANANA_MODEL` | `auto` | `auto`, `flash`, `nb2`, `pro` |
 
-### Output & Response
+#### Output & Response
 
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `IMAGE_OUTPUT_DIR` | `~/nanobanana-images` | Base directory for saved images |
 | `RETURN_FULL_IMAGE` | `false` | Return full resolution in MCP response instead of thumbnails |
 
-### Server Transport
+#### Server Transport
 
 | Variable | Default | Description |
 |----------|---------|-------------|
@@ -36,14 +36,14 @@ All configuration is environment-variable based. Copy `.env.example` → `.env` 
 | `FASTMCP_PORT` | `9000` | HTTP mode only |
 | `FASTMCP_MASK_ERRORS` | `true` | Hide internal error details from users |
 
-### Logging
+#### Logging
 
 | Variable | Default | Options |
 |----------|---------|---------|
 | `LOG_LEVEL` | `INFO` | `DEBUG`, `INFO`, `WARNING`, `ERROR` |
 | `LOG_FORMAT` | `standard` | `standard`, `json`, `detailed` |
 
-### Pro Model (Optional Tuning)
+#### Pro Model (Optional Tuning)
 
 | Variable | Default | Description |
 |----------|---------|-------------|

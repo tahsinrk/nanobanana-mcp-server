@@ -32,12 +32,12 @@ A production-ready **Model Context Protocol (MCP)** server that provides AI-powe
 
 ## 🚀 Quick Start
 
-### Prerequisites
+#### Prerequisites
 
 1. **Google Gemini API Key** - [Get one free here](https://makersuite.google.com/app/apikey)
 2. **Python 3.11+** (for development only)
 
-### Installation
+#### Installation
 
 Option 1: From MCP Registry (Recommended)
 This server is available in the [Model Context Protocol Registry](https://registry.modelcontextprotocol.io/?q=nanobanana). Search for "nanobanana" or use the MCP name below with your MCP client.
@@ -58,7 +58,7 @@ pip install nanobanana-mcp-server
 
 ## 🔧 Configuration
 
-### Authentication Methods
+#### Authentication Methods
 
 Nano Banana supports two authentication methods via `NANOBANANA_AUTH_METHOD`:
 
@@ -66,11 +66,11 @@ Nano Banana supports two authentication methods via `NANOBANANA_AUTH_METHOD`:
 2. **Vertex AI ADC** (`vertex_ai`): Uses Google Cloud Application Default Credentials. Best for production on Google Cloud (Cloud Run, GKE, GCE).
 3. **Automatic** (`auto`): Defaults to API Key if present, otherwise tries Vertex AI.
 
-#### 1. API Key Authentication (Default)
+##### 1. API Key Authentication (Default)
 
 Set `GEMINI_API_KEY` environment variable.
 
-#### 2. Vertex AI Authentication (Google Cloud)
+##### 2. Vertex AI Authentication (Google Cloud)
 
 Required environment variables:
 
@@ -83,9 +83,9 @@ Required environment variables:
 - Enable Vertex AI API: `gcloud services enable aiplatform.googleapis.com`
 - Grant IAM Role: `roles/aiplatform.user` to the service account.
 
-### Claude Desktop
+#### Claude Desktop
 
-#### Option 1: Using Published Server (Recommended)
+##### Option 1: Using Published Server (Recommended)
 
 Add to your `claude_desktop_config.json`:
 
@@ -103,7 +103,7 @@ Add to your `claude_desktop_config.json`:
 }
 ```
 
-#### Option 2: Using Local Source (Development)
+##### Option 2: Using Local Source (Development)
 
 If you are running from source code, point to your local installation:
 
@@ -122,7 +122,7 @@ If you are running from source code, point to your local installation:
 }
 ```
 
-#### Option 3: Using Vertex AI (ADC)
+##### Option 3: Using Vertex AI (ADC)
 
 To authenticate with Google Cloud Application Default Credentials (instead of an API Key):
 
@@ -147,7 +147,7 @@ To authenticate with Google Cloud Application Default Credentials (instead of an
 - **macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
 - **Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
 
-### Claude Code (VS Code Extension)
+#### Claude Code (VS Code Extension)
 
 Install and configure in VS Code:
 
@@ -166,7 +166,7 @@ Install and configure in VS Code:
    }
    ```
 
-### Cursor
+#### Cursor
 
 Add to Cursor's MCP configuration:
 
@@ -184,7 +184,7 @@ Add to Cursor's MCP configuration:
 }
 ```
 
-### Continue.dev (VS Code/JetBrains)
+#### Continue.dev (VS Code/JetBrains)
 
 Add to your `config.json`:
 
@@ -203,7 +203,7 @@ Add to your `config.json`:
 }
 ```
 
-### Open WebUI
+#### Open WebUI
 
 Configure in Open WebUI settings:
 
@@ -220,7 +220,7 @@ Configure in Open WebUI settings:
 }
 ```
 
-### Gemini CLI / Generic MCP Client
+#### Gemini CLI / Generic MCP Client
 
 ```bash
 # Set environment variable
@@ -237,7 +237,7 @@ python -m nanobanana_mcp_server.server
 
 Nano Banana supports three Gemini models with intelligent automatic selection:
 
-### 🍌 NB2 — Nano Banana 2 (Gemini 3.1 Flash Image) ⭐ DEFAULT
+#### 🍌 NB2 — Nano Banana 2 (Gemini 3.1 Flash Image) ⭐ DEFAULT
 
 **Flash speed with Pro-level quality — the best of both worlds**
 
@@ -251,7 +251,7 @@ Nano Banana supports three Gemini models with intelligent automatic selection:
 - **Best for**: Almost everything — production assets, marketing, photography, text overlays
 - **model_tier**: `"nb2"` (or `"auto"` — NB2 is the auto default)
 
-### 🏆 Pro Model — Nano Banana Pro (Gemini 3 Pro Image)
+#### 🏆 Pro Model — Nano Banana Pro (Gemini 3 Pro Image)
 
 **Maximum reasoning depth for the most demanding compositions**
 
@@ -265,7 +265,7 @@ Nano Banana supports three Gemini models with intelligent automatic selection:
 - **Best for**: Complex narrative scenes, intricate compositions, maximum reasoning required
 - **model_tier**: `"pro"`
 
-### ⚡ Flash Model (Gemini 2.5 Flash Image)
+#### ⚡ Flash Model (Gemini 2.5 Flash Image)
 
 **Legacy model for high-volume rapid iteration**
 
@@ -274,7 +274,7 @@ Nano Banana supports three Gemini models with intelligent automatic selection:
 - **Best for**: High-volume generation, quick drafts where 4K is not needed
 - **model_tier**: `"flash"`
 
-### 🤖 Automatic Selection (Recommended)
+#### 🤖 Automatic Selection (Recommended)
 
 By default, the server uses **AUTO** mode which routes to **NB2** unless Pro's deeper reasoning is clearly needed:
 
@@ -290,7 +290,7 @@ By default, the server uses **AUTO** mode which routes to **NB2** unless Pro's d
 - Speed keywords: "quick", "draft", "sketch", "rapid"
 - High-volume batch generation (`n > 2`)
 
-### Usage Examples
+#### Usage Examples
 
 ```python
 # Automatic selection (recommended) — routes to NB2 by default
@@ -343,7 +343,7 @@ generate_image(
 )
 ```
 
-### 📐 Aspect Ratio Control
+#### 📐 Aspect Ratio Control
 
 Control the output image dimensions with the `aspect_ratio` parameter:
 
@@ -373,7 +373,7 @@ generate_image(
 
 **Note**: Aspect ratio works with both Flash and Pro models. For best results with specific aspect ratios at high resolution, use the Pro model with `resolution="4k"`.
 
-### 📁 Output Path Control ⭐ NEW!
+#### 📁 Output Path Control ⭐ NEW!
 
 Control where generated images are saved with the `output_path` parameter:
 
@@ -461,7 +461,7 @@ LOG_FORMAT=standard                        # standard, json, detailed
 
 ## 🐛 Troubleshooting
 
-### Common Issues
+#### Common Issues
 
 **"GEMINI_API_KEY not set"**
 
@@ -478,7 +478,7 @@ LOG_FORMAT=standard                        # standard, json, detailed
 - The server creates images in `~/nanobanana-images` by default
 - Ensure write permissions to your home directory
 
-### Development Setup
+#### Development Setup
 
 For local development:
 

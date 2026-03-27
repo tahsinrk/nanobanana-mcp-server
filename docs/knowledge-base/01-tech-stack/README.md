@@ -53,12 +53,12 @@
 
 ## Tech Decisions
 
-### 2026-01-06 — FastMCP over raw MCP SDK
+#### 2026-01-06 — FastMCP over raw MCP SDK
 - **Background:** Needed MCP server with minimal boilerplate for decorator-based tool registration
 - **Choice:** `fastmcp>=2.11.0`
 - **Reason:** Native `@server.tool()`, `@server.resource()`, `@server.prompt()` decorators; built-in STDIO/HTTP transport; active development
 
-### 2026-01-06 — Dual-model architecture (Flash + Pro)
+#### 2026-01-06 — Dual-model architecture (Flash + Pro)
 - **Background:** Users need both speed (iteration) and quality (production assets)
 - **Choice:** Separate `ImageService` (Flash) and `ProImageService` (Pro) behind `ModelSelector`
 - **Reason:** Clean separation, model-specific configs, intelligent auto-routing without exposing complexity

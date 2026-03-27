@@ -61,7 +61,7 @@ nanobanana-mcp-server/
 
 ## Core Components
 
-### 1. Configuration Management
+#### 1. Configuration Management
 
 **File**: `config/settings.py`
 
@@ -109,7 +109,7 @@ class GeminiConfig:
     request_timeout: int = 30  # seconds
 ```
 
-### 2. FastMCP Server Core
+#### 2. FastMCP Server Core
 
 **File**: `core/server.py`
 
@@ -187,7 +187,7 @@ class NanoBananaMCP:
             self.server.run()
 ```
 
-### 3. Gemini API Client Service
+#### 3. Gemini API Client Service
 
 **File**: `services/gemini_client.py`
 
@@ -274,7 +274,7 @@ class GeminiClient:
             raise
 ```
 
-### 4. Image Service
+#### 4. Image Service
 
 **File**: `services/image_service.py`
 
@@ -410,7 +410,7 @@ class ImageService:
             raise
 ```
 
-### 5. Tool Implementation
+#### 5. Tool Implementation
 
 **File**: `tools/generate_image.py`
 
@@ -523,7 +523,7 @@ def _get_image_service() -> ImageService:
     pass
 ```
 
-### 6. Resource Implementation
+#### 6. Resource Implementation
 
 **File**: `resources/template_catalog.py`
 
@@ -587,7 +587,7 @@ def register_template_catalog_resource(server: FastMCP):
             raise
 ```
 
-### 7. Prompt Implementation
+#### 7. Prompt Implementation
 
 **File**: `prompts/photography.py`
 
@@ -620,7 +620,7 @@ def register_photography_prompts(server: FastMCP):
             raise
 ```
 
-### 8. Utility Components
+#### 8. Utility Components
 
 **File**: `utils/image_utils.py`
 
@@ -681,7 +681,7 @@ def convert_image_format(image_b64: str, target_format: str = "PNG") -> str:
 
 ## Component Integration
 
-### Dependency Injection Pattern
+#### Dependency Injection Pattern
 
 ```python
 # main.py or server.py
@@ -715,7 +715,7 @@ if __name__ == "__main__":
 
 ## Testing Strategy
 
-### Unit Test Structure
+#### Unit Test Structure
 
 ```python
 # tests/test_image_service.py
@@ -755,14 +755,14 @@ class TestImageService:
 
 ## Performance Considerations
 
-### Memory Management
+#### Memory Management
 
 1. **Stream Processing**: Large images processed in streams
 2. **Lazy Loading**: Services initialized only when needed
 3. **Resource Cleanup**: Proper cleanup of temporary data
 4. **Connection Pooling**: Reuse HTTP connections for API calls
 
-### Error Recovery
+#### Error Recovery
 
 1. **Circuit Breaker**: Prevent cascading failures
 2. **Retry Logic**: Exponential backoff for transient errors

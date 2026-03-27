@@ -8,27 +8,27 @@ A production-ready Model Context Protocol (MCP) server for AI-powered image gene
 
 ## 📋 Quick Navigation
 
-### 🚀 Getting Started
+#### 🚀 Getting Started
 - **[README.md](../README.md)** - Installation and client configuration
 - **[CLAUDE.md](../CLAUDE.md)** - Claude Code development guidance
 
-### 📚 Core Documentation
+#### 📚 Core Documentation
 - **[API Specification](API_SPECIFICATION.md)** - Complete API reference
 - **[System Design](SYSTEM_DESIGN.md)** - Architecture and design patterns
 - **[Component Design](COMPONENT_DESIGN.md)** - Detailed component documentation
 
-### 🔧 Development
+#### 🔧 Development
 - **[Implementation Plan](IMPLEMENTATION_PLAN.md)** - Development roadmap and milestones
 - **[FastMCP Skeleton](fastmcp-skeleton.md)** - FastMCP integration guide
 - **[Workflows](workflows.md)** - Development workflows and processes
 
-### 📦 Publishing
+#### 📦 Publishing
 - **[Publishing Workflow](PUBLISHING_WORKFLOW.md)** - Complete publishing guide
 - **[PyPI Upload Guide](PYPI_UPLOAD_GUIDE.md)** - PyPI deployment instructions
 
 ## 🏗️ Project Structure
 
-### Package Layout
+#### Package Layout
 ```
 nanobanana_mcp_server/
 ├── __init__.py                 # Package entry point (v0.1.4)
@@ -67,7 +67,7 @@ nanobanana_mcp_server/
     └── validation_utils.py   # Validation helpers
 ```
 
-### Configuration Files
+#### Configuration Files
 ```
 ├── pyproject.toml              # Project configuration and dependencies
 ├── fastmcp.json               # FastMCP CLI configuration
@@ -75,7 +75,7 @@ nanobanana_mcp_server/
 └── uv.lock                    # Dependency lock file
 ```
 
-### Scripts & Tools
+#### Scripts & Tools
 ```
 scripts/
 ├── build.py                   # Automated build script
@@ -84,7 +84,7 @@ scripts/
 
 ## 🔌 MCP Integration
 
-### Available Tools
+#### Available Tools
 | Tool | Description | Status |
 |------|-------------|---------|
 | `generate_image` | AI image generation from prompts | ✅ Active |
@@ -92,7 +92,7 @@ scripts/
 | `output_stats` | Image storage statistics | ✅ Active |
 | `maintenance` | System maintenance operations | ✅ Active |
 
-### Available Resources
+#### Available Resources
 | Resource | URI Pattern | Description |
 |----------|-------------|-------------|
 | File Metadata | `gemini://files/{name}` | Gemini Files API metadata |
@@ -101,7 +101,7 @@ scripts/
 | Template Catalog | `nano-banana://prompt-templates` | Prompt template browser |
 | Operation Status | `nano-banana://operations` | Server operation status |
 
-### Prompt Templates
+#### Prompt Templates
 | Template | Module | Purpose |
 |----------|---------|---------|
 | `photorealistic_shot` | photography.py | High-quality photography |
@@ -113,34 +113,34 @@ scripts/
 
 ## 🛠️ Technical Stack
 
-### Core Dependencies
+#### Core Dependencies
 - **FastMCP** (≥2.11.0) - MCP server framework
 - **Google GenAI** (≥0.3.0) - Gemini API integration
 - **Pillow** (≥10.4.0) - Image processing
 - **Pydantic** (≥2.0.0) - Data validation
 - **Python-dotenv** (≥1.0.1) - Environment management
 
-### Development Tools
+#### Development Tools
 - **uv** - Modern Python package management
 - **Ruff** - Fast Python linter and formatter
 - **MyPy** - Static type checking
 - **Pytest** - Testing framework
 
-### Build System
+#### Build System
 - **Hatchling** - Modern Python build backend
 - **Twine** - PyPI package uploading
 - **Build** - PEP 517 build frontend
 
 ## 📊 Project Metrics
 
-### Package Information
+#### Package Information
 - **Total Python Files:** 40+
 - **Package Size:** ~260KB (wheel + source)
 - **Supported Python:** 3.11+
 - **License:** MIT
 - **Development Status:** Alpha (Production Ready)
 
-### Documentation Coverage
+#### Documentation Coverage
 | Category | Files | Status |
 |----------|-------|---------|
 | API Documentation | 3 | ✅ Complete |
@@ -151,27 +151,27 @@ scripts/
 
 ## 🔍 Version History
 
-### v0.1.4 (Latest) - Comprehensive Import Fixes
+#### v0.1.4 (Latest) - Comprehensive Import Fixes
 - ✅ Fixed all absolute imports to relative imports
 - ✅ Restructured to proper package layout
 - ✅ Added automated PyPI publishing workflow
 - ✅ Streamlined README with client configurations
 
-### v0.1.3 - Import Fixes
+#### v0.1.3 - Import Fixes
 - ✅ Fixed service import issues
 - ✅ Updated resource handlers
 
-### v0.1.2 - Directory Fixes
+#### v0.1.2 - Directory Fixes
 - ✅ Fixed read-only filesystem issues
 - ✅ Improved default directory handling
 
-### v0.1.1 - Initial Package
+#### v0.1.1 - Initial Package
 - ✅ Basic MCP server functionality
 - ✅ Image generation tools
 
 ## 📋 Development Status
 
-### ✅ Completed Features
+#### ✅ Completed Features
 - Production-ready MCP server
 - Comprehensive image generation capabilities
 - File management and storage
@@ -180,12 +180,12 @@ scripts/
 - PyPI package publishing
 - Multi-client configuration support
 
-### 🔄 In Progress
+#### 🔄 In Progress
 - Enhanced documentation
 - Performance optimization
 - Additional prompt templates
 
-### 📋 Planned Features
+#### 📋 Planned Features
 - Image editing capabilities expansion
 - Batch processing tools
 - Advanced template customization

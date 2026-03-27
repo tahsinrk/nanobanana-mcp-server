@@ -18,7 +18,7 @@ uv run python scripts/upload.py
 
 ## End User Installation & Configuration
 
-### Claude Desktop
+#### Claude Desktop
 ```json
 {
   "mcpServers": {
@@ -33,16 +33,16 @@ uv run python scripts/upload.py
 }
 ```
 
-### Claude Code (CLI)
+#### Claude Code (CLI)
 ```bash
 claude mcp add nanobanana -- uvx nanobanana-mcp-server@latest
 # Set env var separately or in shell profile
 ```
 
-### Cursor / Continue.dev / Open WebUI
+#### Cursor / Continue.dev / Open WebUI
 Same pattern as Claude Desktop — command-based MCP server setup with `uvx nanobanana-mcp-server@latest`.
 
-### Direct Python
+#### Direct Python
 ```bash
 pip install nanobanana-mcp-server
 export GEMINI_API_KEY=your-key

@@ -2,7 +2,7 @@
 
 ## Development Issues
 
-### Port conflict on `fastmcp dev`
+#### Port conflict on `fastmcp dev`
 
 **Symptom:** `EADDRINUSE` error when starting the dev server
 
@@ -19,7 +19,7 @@ pkill -f "fastmcp.*nanobanana_mcp_server.server"
 
 ---
 
-### JSON parsing errors in Claude Desktop / MCP client
+#### JSON parsing errors in Claude Desktop / MCP client
 
 **Symptom:** MCP client shows JSON parse errors; server appears to crash
 
@@ -29,7 +29,7 @@ pkill -f "fastmcp.*nanobanana_mcp_server.server"
 
 ---
 
-### Pro model requests always use Flash model
+#### Pro model requests always use Flash model
 
 **Symptom:** Setting `model_tier="pro"` has no effect; response metadata shows `"model_tier": "flash"`
 
@@ -37,7 +37,7 @@ pkill -f "fastmcp.*nanobanana_mcp_server.server"
 
 ---
 
-### `thinking_level` parameter rejected by API
+#### `thinking_level` parameter rejected by API
 
 **Cause:** `thinking_level` is **not** a Gemini API parameter — it's internal to the `ModelSelector` for routing decisions only.
 
@@ -45,7 +45,7 @@ pkill -f "fastmcp.*nanobanana_mcp_server.server"
 
 ---
 
-### Pro model fails with region error
+#### Pro model fails with region error
 
 **Symptom:** `404` or region-not-supported error for Pro model with Vertex AI
 
@@ -53,7 +53,7 @@ pkill -f "fastmcp.*nanobanana_mcp_server.server"
 
 ---
 
-### Thumbnail creation fails silently
+#### Thumbnail creation fails silently
 
 **Behavior (by design):** If thumbnail generation fails (e.g. Pillow error), the full image is returned instead. This is graceful degradation added in v0.3.3.
 
@@ -61,11 +61,11 @@ pkill -f "fastmcp.*nanobanana_mcp_server.server"
 
 ## API Key Issues
 
-### Which env var to use?
+#### Which env var to use?
 
 Both `GEMINI_API_KEY` and `GOOGLE_API_KEY` work — they're treated identically. `GEMINI_API_KEY` is preferred for clarity.
 
-### API key works locally but not in Claude Desktop
+#### API key works locally but not in Claude Desktop
 
 Ensure the key is set in Claude Desktop's MCP server `env` config, not just in your shell profile:
 ```json
@@ -76,17 +76,17 @@ Ensure the key is set in Claude Desktop's MCP server `env` config, not just in y
 
 ## Image Generation Issues
 
-### 4K images not generating
+#### 4K images not generating
 
 **Check:** Are you on Pro model? `resolution="4k"` requires Pro model (automatically selected when specified, but verify with `model_tier` in response metadata).
 
-### `output_mime_type` parameter error
+#### `output_mime_type` parameter error
 
 **Cause:** This parameter was removed from `ImageConfig` in v0.3.2 — it's not supported by the Gemini API.
 
 **Fix:** Do NOT add `output_mime_type` back. The API doesn't accept it.
 
-### Multi-image conditioning not working
+#### Multi-image conditioning not working
 
 **Check:** Provide absolute file paths in `input_image_path_1/2/3`. Relative paths may not resolve correctly depending on MCP client working directory.
 
@@ -94,7 +94,7 @@ Ensure the key is set in Claude Desktop's MCP server `env` config, not just in y
 
 ## Vertex AI / ADC Issues
 
-### ADC credentials not found
+#### ADC credentials not found
 
 ```bash
 gcloud auth application-default login
@@ -102,6 +102,6 @@ gcloud auth application-default login
 
 For service accounts: set `GOOGLE_APPLICATION_CREDENTIALS=/path/to/key.json`
 
-### Required IAM role
+#### Required IAM role
 
 Your GCP service account or user needs: `roles/aiplatform.user`
